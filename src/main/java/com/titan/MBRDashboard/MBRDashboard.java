@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.titan.MBRDashboard")
+@ComponentScan(basePackages = "com.titan.MBRDashboard.service.DashboardService")
 
 public class MBRDashboard {
 
