@@ -63,6 +63,7 @@ import com.titan.MBRDashboard.bean.UserLoginBean;
 import com.titan.MBRDashboard.bean.smUserMasterBean;
 import com.titan.MBRDashboard.dto.MasterData;
 import com.titan.MBRDashboard.dto.MonthlyDataFilter;
+import com.titan.MBRDashboard.dto.OutputForMontlyFilter;
 import com.titan.MBRDashboard.service.Userservice;
 import com.titan.util.AesUtil;
 import com.titan.util.PasswordUtils;
@@ -2780,5 +2781,28 @@ System.out.println("CCCOWNER"+CCCOWNER);
 				model.addAttribute("MESSAGE", result);
 				return result;
 		}
+		
+		@PostMapping(value = "MonthlyTrend")
+		public OutputForMontlyFilter MonthlyTrend(HttpServletRequest request, HttpServletResponse response,
+			 RedirectAttributes redirect, Model model, @RequestBody MonthlyDataFilter filter) {
+			OutputForMontlyFilter result =null;
+			
+			
+			HttpSession session = request.getSession();
+			String loginId = "";
+//			try {
+//				Map<String, Object> userMap = (Map) session.getAttribute("userMap");
+//				loginId = (String) userMap.get("login_id");
+//			} catch (Exception er) {
+//				er.printStackTrace();
+//				//return new StringBuilder("Session is timeout, <a href='login' >click here</a> to login");
+//			}
+			
+				result = userService.MonthlyTrend(filter);
+				redirect.addFlashAttribute("MESSAGE", result);
+				model.addAttribute("MESSAGE", result);
+				return result;
+		}
+		
 		
 		}

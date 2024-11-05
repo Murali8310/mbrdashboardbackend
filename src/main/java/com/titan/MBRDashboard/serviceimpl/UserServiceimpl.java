@@ -36,6 +36,8 @@ import com.titan.MBRDashboard.bean.UserLoginBean;
 import com.titan.MBRDashboard.bean.productMasterbean;
 import com.titan.MBRDashboard.dao.UserDao;
 import com.titan.MBRDashboard.dto.MasterData;
+import com.titan.MBRDashboard.dto.MonthlyDataFilter;
+import com.titan.MBRDashboard.dto.OutputForMontlyFilter;
 import com.titan.MBRDashboard.service.Userservice;
 
 @Service("userService")
@@ -1106,6 +1108,11 @@ public class UserServiceimpl implements Userservice {
 	public MasterData GetMasterData() {
 		// TODO Auto-generated method stub
 		return userDao.GetMasterData();
+	}
+
+	@Override
+	public OutputForMontlyFilter MonthlyTrend(MonthlyDataFilter filter) {
+		return userDao.MonthlyTrend(filter);
 	}
 
 }

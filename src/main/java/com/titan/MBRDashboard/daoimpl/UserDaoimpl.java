@@ -71,6 +71,8 @@ import com.titan.MBRDashboard.bean.productMasterbean;
 import com.titan.MBRDashboard.bean.smUserMasterBean;
 import com.titan.MBRDashboard.dao.UserDao;
 import com.titan.MBRDashboard.dto.MasterData;
+import com.titan.MBRDashboard.dto.MonthlyDataFilter;
+import com.titan.MBRDashboard.dto.OutputForMontlyFilter;
 import com.titan.MBRDashboard.modal.Brand;
 import com.titan.MBRDashboard.modal.RSName;
 import com.titan.MBRDashboard.modal.Region;
@@ -6438,5 +6440,61 @@ Calendar cal = Calendar.getInstance();
 		Query checkQuery =  entityManager.createNativeQuery(checkSql);
 		rsName=checkQuery.getResultList();
 		return rsName;
+	}
+
+	@Override
+	public OutputForMontlyFilter MonthlyTrend(MonthlyDataFilter filter) {
+		// TODO Auto-generated method stub
+		OutputForMontlyFilter result=new OutputForMontlyFilter();
+		result =getDataForMonthlyTrend(filter);
+		return result;
+		
+	}
+	private OutputForMontlyFilter getDataForMonthlyTrend(MonthlyDataFilter filter) {
+		OutputForMontlyFilter filteredData=new OutputForMontlyFilter();
+		String storedProcedureCall = "EXEC GetOrderSummary @RegionList = :regionList, @StartDate = :startDate, @EndDate = :endDate, @BrandList = :brandList, @RSNameList = :rsNameList";
+        
+        // Create a native query
+        Query query = entityManager.createNativeQuery(storedProcedureCall);
+        
+        // Set the parameters for the stored procedure call
+        query.setParameter("regionList", filter.getRegionList());  // @RegionList (e.g., 'EAST, WEST')
+        query.setParameter("startDate", filter.getStartDate());    // @StartDate (e.g., 20240601)
+        query.setParameter("endDate", filter.getEndDate());        // @EndDate (e.g., 20240630)
+        query.setParameter("brandList", filter.getBrandList());    // @BrandList (e.g., 'Titan')
+        query.setParameter("rsNameList", filter.getRsNameList());  // @RSNameList (e.g., '' or some value)
+
+        // Execute the query to invoke the stored procedure
+        try {
+        	List<Object[]> result = query.getResultList();
+        	//filteredData = (OutputForMontlyFilter) query.getSingleResult();
+        	for (Object[] row : result) {
+        	    // Assuming row contains values in the correct order for mapping
+        	    filteredData.setTotalRevenue((BigDecimal)row[0]);
+        	    filteredData.setTotalQTY((Integer) row[1]);
+        	    filteredData.setTotalRetailerCode((Integer) row[2]);
+
+        	    // Now, filteredData is populated with values
+        	}
+        }
+        catch(Exception e) {
+        	e.printStackTrace();
+        }
+        // Process the result set (Example: iterate through results)
+//        for (Object[] row : resultList) {
+//            // Assuming the stored procedure returns 3 columns
+//            Double totalPriceSum = (Double) row[0]; // TotalPriceSum
+//            Double totalOrderQty = (Double) row[1];  // TotalOrderQty
+//            Long distinctRetailerCount = (Long) row[2]; // DistinctRetailerCount
+//
+//            // Print or process the results
+//            System.out.println("Total Price: " + totalPriceSum);
+//            System.out.println("Total Order Quantity: " + totalOrderQty);
+//            System.out.println("Distinct Retailer Count: " + distinctRetailerCount);
+//        }
+//    }
+		
+		return filteredData;
+
 	}
 }

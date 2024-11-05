@@ -14,6 +14,8 @@ import com.titan.MBRDashboard.bean.Product;
 import com.titan.MBRDashboard.bean.UserLoginBean;
 import com.titan.MBRDashboard.bean.smUserMasterBean;
 import com.titan.MBRDashboard.dto.MasterData;
+import com.titan.MBRDashboard.dto.MonthlyDataFilter;
+import com.titan.MBRDashboard.dto.OutputForMontlyFilter;
 
 public interface Userservice {
 
@@ -224,6 +226,9 @@ public interface Userservice {
 
 	
 	MasterData GetMasterData();
+
+
+	OutputForMontlyFilter MonthlyTrend(MonthlyDataFilter filter);
 
 
 }
