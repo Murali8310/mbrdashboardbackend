@@ -46,34 +46,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "*/").permitAll()
-                .antMatchers(HttpMethod.GET, "/login").permitAll()
-            .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
-        
+//                .antMatchers(HttpMethod.OPTIONS, "*/").permitAll()
+//                .antMatchers(HttpMethod.GET, "/login").permitAll()
+            .anyRequest().permitAll();
+//            .and()
+//                .logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll()
+//                .invalidateHttpSession(true)
+//                .deleteCookies("JSESSIONID");
+//        
 		
-		  http.headers() .cacheControl() .disable();
-		  
-		  http.headers() .addHeaderWriter(new StaticHeadersWriter("Cache-Control",
-		  "public, max-age=0"));
-		 
-		/*
-		 * http.headers() .defaultsDisabled() .cacheControl();
-		 */
-        
-     
-		/*
-		 * http.headers() .httpStrictTransportSecurity() .disable();
-		 */
-        http.headers()
-        .httpStrictTransportSecurity()
-            .includeSubDomains(true)
-            .maxAgeInSeconds(0);
-        
-			
-		 http.headers() .xssProtection() .block(false);
+//		  http.headers() .cacheControl() .disable();
+//		  
+//		  http.headers() .addHeaderWriter(new StaticHeadersWriter("Cache-Control",
+//		  "public, max-age=0"));
+//		 
+//		/*
+//		 * http.headers() .defaultsDisabled() .cacheControl();
+//		 */
+//        
+//     
+//		/*
+//		 * http.headers() .httpStrictTransportSecurity() .disable();
+//		 */
+//        http.headers()
+//        .httpStrictTransportSecurity()
+//            .includeSubDomains(true)
+//            .maxAgeInSeconds(0);
+//        
+//			
+//		 http.headers() .xssProtection() .block(false);
 		 
     }
 }

@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
-//import com.titan.MBRDashboard.bean.BuyerIndentBean;
-//import com.titan.MBRDashboard.bean.IndentMasterBean;
-//import com.titan.MBRDashboard.bean.Product;
-//import com.titan.MBRDashboard.bean.UserLoginBean;
-//import com.titan.MBRDashboard.bean.smUserMasterBean;
+import com.titan.MBRDashboard.bean.BuyerIndentBean;
+import com.titan.MBRDashboard.bean.IndentMasterBean;
+import com.titan.MBRDashboard.bean.Product;
+import com.titan.MBRDashboard.bean.UserLoginBean;
+import com.titan.MBRDashboard.bean.smUserMasterBean;
+import com.titan.MBRDashboard.dto.MasterData;
 
 public interface Userservice {
 
@@ -23,9 +24,9 @@ public interface Userservice {
 
 	List<Object[]> getAllSubmenuNamesByLoginId(String loginId, int menuId);
 
-	// Map findUser(UserLoginBean userLogin);
+	 Map findUser(UserLoginBean userLogin);
 
-	//Map<String, Object> findloginuser(UserLoginBean userLogin,String Passwords);
+	Map<String, Object> findloginuser(UserLoginBean userLogin,String Passwords);
 
 
 	List<Object> usersearch(String firstname);
@@ -56,16 +57,16 @@ public interface Userservice {
 	List<String> getProductByCategory(String category,String userId);
 
 
-	//String IndentTransaction(Product[] products, String loginId,String userId,String userName);
+	String IndentTransaction(Product[] products, String loginId,String userId,String userName);
 	
 
 	List<Object> getgetIndentList(String costcenter);
 	
-	//String tempCartIndentCreation(Product[] products, String loginId,String userId,String userName);
+	String tempCartIndentCreation(Product[] products, String loginId,String userId,String userName);
 
 	List<String> getAllProductsByIndent(String loginId);
 
-	//String IndentTransactionQuantitySave(Product[] products, String loginID, String userId, String userName);
+	String IndentTransactionQuantitySave(Product[] products, String loginID, String userId, String userName);
 
 	List<String> GetAddMoreProducts(String loginId);
 
@@ -76,9 +77,9 @@ public interface Userservice {
 
 	List<String> getProductByCategoryaAddMore(String category, String userId);
 
-	//String tempIndentUpdateCreation(Product[] products, String loginID, String userId, String userName);
+	String tempIndentUpdateCreation(Product[] products, String loginID, String userId, String userName);
 
-	//String IndentTransactionUpdate(Product[] products, String loginID, String userId, String userName);
+	String IndentTransactionUpdate(Product[] products, String loginID, String userId, String userName);
 
 	List<Object> getBuyerIndentList(String Year, String Month);
 
@@ -86,9 +87,9 @@ public interface Userservice {
 	
 	List<String> GetAllProductsByIndentNumber(String loginId, String IndentNumner);
 
-	//String BuyerIndentUpdateSave(BuyerIndentBean[] products, String loginID, String userId, String userName);
+	String BuyerIndentUpdateSave(BuyerIndentBean[] products, String loginID, String userId, String userName);
 	
-		//String userCreationByForm(String empid, String empname, String designation, String city, String email, String mobile,String loginId);
+	String userCreationByForm(String empid, String empname, String designation, String city, String email, String mobile,String loginId);
 	
 	StringBuilder uploadBulkbudgetExcelFile(MultipartFile file, String loginId);
 	StringBuilder uploadBulkholidayExcelFile(MultipartFile file, String loginId);
@@ -108,7 +109,7 @@ public interface Userservice {
 	List<Object> getDistribuFooterList();
 
 
-	//String DistributionPageSave(BuyerIndentBean[] products, String loginID, String userId, String userName);
+	String DistributionPageSave(BuyerIndentBean[] products, String loginID, String userId, String userName);
 
 
 	List<Object> getDistributerIndentList();
@@ -117,8 +118,8 @@ public interface Userservice {
 	List<Object> getAllyearDetails();
 	String budgetupdate(String descode, String yearlybudget,String budgetextension,String loginId);
 	String getEmailIdByloginIdn(String email);
-	//String getUserEmailFromDatabase(String email);
-	//String getIndentManagerEmailFromDatabase(String email);
+	String getUserEmailFromDatabase(String email);
+	String getIndentManagerEmailFromDatabase(String email);
 	
 	String checkIndentForMonth(String cFY, String MonthText, String userId);
 	
@@ -219,6 +220,10 @@ public interface Userservice {
 	List<Object> getAllBudgetCCIDDe();
 	
 	List<Object> portalBlcokingMechanism(String loginId);
+
+
+	
+	MasterData GetMasterData();
 
 
 }
